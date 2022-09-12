@@ -1,7 +1,7 @@
 import os
 from jogoteca import app
 from flask_wtf import FlaskForm
-from wtforms import StringField, validators, SubmitField
+from wtforms import StringField, validators, SubmitField, PasswordField
 
 
 class FormularioJogo(FlaskForm):
@@ -10,6 +10,10 @@ class FormularioJogo(FlaskForm):
     console = StringField('Console', [validators.DataRequired(), validators.Length(min=1, max=20)])
     salvar = SubmitField('Salvar')
 
+class FormularioUsuario(FlaskForm):
+    nickname = StringField('Nickname', [validators.DataRequired(), validators.Length(min=1, max=8)])
+    password = PasswordField('Password', [validators.DataRequired(), validators.Length(min=1, max=100)])
+    login = SubmitField('Login')
 def recupera_imagem(id):
     for nome_arquivo in os.listdir(app.config['UPLOAD_PATH']):
         if f'capa{id}' in nome_arquivo:
